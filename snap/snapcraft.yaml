@@ -1,0 +1,41 @@
+name: freeoffice
+base: core18 
+version: '2018' 
+summary: The best free alternative to Microsoft Office.  For Windows, Mac and Linux. 
+description: |
+  FreeOffice is a complete Office suite with a word processor, a spreadsheet 
+  application and a presentation program – all compatible with their counterparts 
+  in Microsoft Office.
+grade: devel 
+confinement: strict 
+
+apps:
+  planmaker: 
+    command: usr/share/freeoffice2018/planmaker
+    plugs: [x11, opengl]
+  textmaker: 
+    command: usr/share/freeoffice2018/textmaker
+    plugs: [x11, opengl]
+
+parts:
+  freeoffice:
+    plugin: nil
+    source: https://www.softmaker.net/down/softmaker-freeoffice-2018_976-01_amd64.deb #./softmaker-freeoffice-2018_976-01_amd64.deb
+    # source: ./softmaker-freeoffice-2018_976-01_amd64.deb
+    source-type: deb
+    override-build:
+      cp -av usr/ $SNAPCRAFT_PART_INSTALL/
+    stage-packages:
+      - libasn1-8-heimdal
+      - libcurl4
+      - libgssapi3-heimdal
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libkrb5-26-heimdal
+      - libx11-6
+      - libxmu6
+      - libxrender1
+      - libgl1
+      - libxrandr2
